@@ -3,7 +3,7 @@ export default function Grid({word}){
     <div className="grid">
         {
             word.map((letter, index) => (
-                <SingleLetter key={`${letter}-${index}`} letter={letter}/>
+                <SingleLetter key={`${btoa(letter)}-${btoa(index)}`} letter={letter}/>
             ))
         }
     </div>

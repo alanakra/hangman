@@ -1,6 +1,6 @@
 import '../keyboard.scss'
 import { useEffect, useState } from 'react'
-export default function Keyboard(){
+export default function Keyboard({rightWord, setGoodResponseList, badResponseList, setBadResponseList}){
     const [letterInput, setLetterInput] = useState('')
     const alphabet = Array.from('abcdefghijklmnopqrstuvwxyz-');
     
@@ -9,6 +9,7 @@ export default function Keyboard(){
             const key = e.key
             if(alphabet.includes(key)) {
                 setLetterInput(e.key)
+                isLetterIncluded(letterInput)
             }
         }
         window.addEventListener('keyup', handleKeyUp)
@@ -20,6 +21,15 @@ export default function Keyboard(){
     const handleClickBtn = e => {
         const letter = e.target.getAttribute('data-letter').toLowerCase()
         setLetterInput(letter)
+        isLetterIncluded(letterInput)
+    }
+
+    const isLetterIncluded = letterInput => {
+        if (rightWord.includes(letterInput)) {
+            console.log('good')
+        } else {
+            console.log('bad')
+        }
     }
 
     return(

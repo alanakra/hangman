@@ -2,10 +2,13 @@ import { useEffect, useState } from "react"
 import Grid from "./components/Grid"
 import Figure from "./components/Figure"
 import Keyboard from "./components/Keyboard"
+import TriedLetters from "./components/TriedLetters"
 
 function App() {
   const [word, setWord] = useState([])
   const [loading, setLoading] = useState(true)
+  const [goodResponseList, setGoodResponseList] = useState([])
+  const [badResponseList, setBadResponseList] = useState([])
   const [fetchError, setFetchError] = useState(null)
 
   useEffect(() => {
@@ -15,11 +18,11 @@ function App() {
           method: 'POST'
         })
         const data = await response.json()
-        setLoading(false)
         const word = data.word
         const convertedWord = [...word]
         console.log(convertedWord)
         setWord(convertedWord)
+        setLoading(false)
       } catch (error) {
         console.error("Error fetching the word:", error)
         setLoading(false)
@@ -40,7 +43,12 @@ function App() {
       </div>
       <Grid word={word}/>
       <Figure/>
-      <Keyboard/>
+      <Keyboard 
+        rightWord={word} 
+        badResponseList={badResponseList} 
+        setBadResponseList={setBadResponseList}
+        setGoodResponseList={setGoodResponseList}/>
+      <TriedLetters lettersList={badResponseList}/>
     </>
   )
 }
