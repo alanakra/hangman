@@ -1,4 +1,5 @@
 import '../keyboard.scss'
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react'
 export default function Keyboard({rightWord, setGoodResponseList, badResponseList, setBadResponseList}){
     const [letterInput, setLetterInput] = useState('')
@@ -76,4 +77,11 @@ export default function Keyboard({rightWord, setGoodResponseList, badResponseLis
             </div>
         </>
     )
+}
+
+Keyboard.propTypes = {
+    rightWord: PropTypes.array,
+    setGoodResponseList: PropTypes.function,
+    badResponseList: PropTypes.array,
+    setBadResponseList: PropTypes.function
 }

@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export default function TriedLetters({lettersList}) {
     const stopDuplicate = new Set(lettersList)
     return(
@@ -19,4 +21,8 @@ export default function TriedLetters({lettersList}) {
             </div>
         </>
     )
+}
+
+TriedLetters.propTypes = {
+    lettersList: PropTypes.array
 }

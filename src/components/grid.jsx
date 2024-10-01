@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 export default function Grid({word}){
     return(
     <div className="grid">
@@ -12,4 +14,12 @@ export default function Grid({word}){
 
 function SingleLetter({letter}) {
     return <div className="letter">{letter.toUpperCase()}</div>
+}
+
+Grid.propTypes = {
+    word: PropTypes.array
+}
+
+SingleLetter.propTypes = {
+    letter: PropTypes.string
 }
