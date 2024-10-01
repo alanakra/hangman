@@ -1,4 +1,5 @@
 export default function TriedLetters({lettersList}) {
+    const stopDuplicate = new Set(lettersList)
     return(
         <>
             <h1>Bad responses</h1>
@@ -11,7 +12,7 @@ export default function TriedLetters({lettersList}) {
                 gap: '20px'
             }}>
                 {
-                    lettersList.map((letter, index) => (
+                    Array.from(stopDuplicate).map((letter, index) => (
                         <p key={`${letter}-${index}`}>{letter}</p>
                     ))
                 }
