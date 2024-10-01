@@ -4,9 +4,9 @@
 }
 
 *, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -21,5 +21,22 @@ body {
   }
   h2 {
     font-size: 1.5rem;
+  }
+}
+
+.grid {
+  $base-fs: 2.25rem;
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+  justify-content: center;
+  font-size: $base-fs;
+  .letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid;
+    height: $base-fs*2.5;
+    width: $base-fs*2;
   }
 }

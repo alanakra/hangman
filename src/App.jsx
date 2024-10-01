@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import Grid from "./components/grid"
 
 function App() {
   const [word, setWord] = useState('')
@@ -10,8 +11,7 @@ function App() {
       try {
         const response = await fetch("http://localhost:3333", {
           method: 'POST'
-        }
-        )
+        })
         const data = await response.json()
         setLoading(false)
         if (word === "") {
@@ -36,6 +36,7 @@ function App() {
         <h1>Hangman</h1>
         <h2 className="word">{word.toUpperCase()}</h2>
       </div>
+      <Grid word={word}/>
     </>
   )
 }
