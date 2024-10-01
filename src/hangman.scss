@@ -61,6 +61,7 @@ $primaryColor: #00A8FF;
         width: 100px;
         background: $primaryColor;
         border-radius: 50px 50px 0 0;
+        text-align: start;
 
         &:after {
             content: ' ';
@@ -136,6 +137,7 @@ $primaryColor: #00A8FF;
 
             .hands,
             .legs {
+                text-align: start;
 
                 &:before,
                 &:after {
