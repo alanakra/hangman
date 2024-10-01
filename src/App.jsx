@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Grid from "./components/Grid"
+import Figure from "./components/Figure"
 
 function App() {
   const [word, setWord] = useState([])
@@ -37,6 +38,7 @@ function App() {
         <h1>Hangman</h1>
       </div>
       <Grid word={word}/>
+      <Figure/>
     </>
   )
 }

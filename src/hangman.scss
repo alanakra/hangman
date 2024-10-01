@@ -1,0 +1,156 @@
+// https://codepen.io/jaga3421/pen/Joedvr
+
+$primaryPlus: #047A9D;
+$primaryColor: #00A8FF;
+
+.hangman {
+    width: 300px;
+    margin: 40px auto;
+    position: relative;
+
+    &>div {
+        position: relative;
+    }
+
+    &.hang1 {
+        .pole {
+            visibility: visible !important;
+        }
+    }
+
+    &.hang2 {
+        .shaft {
+            visibility: visible !important;
+        }
+    }
+
+    &.hang3 {
+        .rope {
+            visibility: visible !important;
+        }
+    }
+
+    &.hang4 {
+        .man {
+            vpxisibility: visible !important;
+        }
+    }
+
+    &.hang5 {
+        .wrapperMan {
+            margin-top: 0px !important;
+
+            .hands,
+            .legs {
+                &:before {
+                    -webkit-animation: deadRight .5s linear;
+                    animation: deadRight .5s linear;
+                }
+
+                &:after {
+                    -webkit-animation: deadLeft .5s linear;
+                    animation: deadLeft .5s linear;
+                }
+            }
+        }
+    }
+
+    .base {
+        visibility: visible;
+        height: 50px;
+        width: 100px;
+        background: $primaryColor;
+        border-radius: 50px 50px 0 0;
+
+        &:after {
+            content: ' ';
+            width: 100px;
+            height: 10px;
+            background: $primaryPlus;
+            position: absolute;
+            bottom: 0;
+        }
+    }
+
+    .pole {
+        height: 300px;
+        width: 10px;
+        background: $primaryColor;
+        margin-left: 45px;
+    }
+
+    .shaft {
+        height: 5px;
+        width: 250px;
+        background: $primaryColor;
+    }
+
+    .rope {
+        height: 50px;
+        width: 1px;
+        background: black;
+        left: 240px;
+        top: 0;
+        position: absolute;
+    }
+
+    .man {
+        height: 200px;
+        width: 100px;
+        position: absolute;
+        top: 50px;
+        left: 190px;
+
+        .wrapperMan {
+            position: relative;
+            margin-top: -20px;
+
+            >div {
+
+                &:after,
+                &:before {
+                    background: $primaryColor;
+                    content: '';
+                    position: absolute;
+                }
+            }
+
+            .face {
+                width: 50px;
+                height: 50px;
+                border-radius: 25px;
+                margin-left: 25px;
+                background: $primaryColor;
+
+                &:after {
+                    height: 100px;
+                    width: 2px;
+                    top: 50px;
+                    left: 50px;
+                }
+            }
+
+            .hands {
+                height: 99px;
+            }
+
+            .hands,
+            .legs {
+
+                &:before,
+                &:after {
+                    height: 2px;
+                    width: 50px;
+                    transform: rotate(-45deg);
+                    transform-origin: 100% 0%;
+                }
+
+                &:before {
+                    transform: rotate(45deg);
+                    transform-origin: 0% 100%;
+                    right: 0;
+                }
+            }
+        }
+    }
+}
