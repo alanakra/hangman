@@ -28,6 +28,10 @@ export default function Keyboard({rightWord, setGoodResponseList, badResponseLis
         if (rightWord.includes(letterInput)) {
             console.log('good')
         } else {
+            const cloneBadResponseList = badResponseList.slice()
+            cloneBadResponseList.push(letterInput)
+            console.log(cloneBadResponseList)
+            setBadResponseList(cloneBadResponseList)
             console.log('bad')
         }
     }
