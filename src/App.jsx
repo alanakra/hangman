@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import Grid from "./components/Grid"
 import Figure from "./components/Figure"
+import Keyboard from "./components/Keyboard"
 
 function App() {
   const [word, setWord] = useState([])
@@ -39,6 +40,7 @@ function App() {
       </div>
       <Grid word={word}/>
       <Figure/>
+      <Keyboard/>
     </>
   )
 }
