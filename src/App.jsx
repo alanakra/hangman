@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import Grid from "./components/grid"
+import Grid from "./components/Grid"
 
 function App() {
   const [word, setWord] = useState([])
