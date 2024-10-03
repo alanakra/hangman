@@ -10,6 +10,7 @@ function App() {
   const [goodResponseList, setGoodResponseList] = useState([])
   const [badResponseList, setBadResponseList] = useState([])
   const [fetchError, setFetchError] = useState(null)
+  const [count, setCount] = useState(6)
 
   useEffect(() => {
     async function fetchWord() {
@@ -42,12 +43,15 @@ function App() {
         <h1>Hangman</h1>
       </div>
       <Grid word={word}/>
+      <h2>{count}</h2>
       <Figure/>
       <Keyboard 
         rightWord={word} 
         badResponseList={badResponseList} 
         setBadResponseList={setBadResponseList}
-        setGoodResponseList={setGoodResponseList}/>
+        setGoodResponseList={setGoodResponseList}
+        setCount={setCount}
+        count={count}/>
       <TriedLetters lettersList={badResponseList}/>
     </>
   )
