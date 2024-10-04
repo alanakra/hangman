@@ -52,7 +52,6 @@ export default function Keyboard({rightWord, setGoodResponseList, badResponseLis
 
     return (
         <div>
-            <h3 style={{ textAlign: 'center', textTransform: 'uppercase' }}>{letterInput}</h3>
             <div className="keyboard-cont" onClick={handleClickBtn}>
                 <div className="first-row">
                     <button className="keyboard-button" data-letter="A">a</button>
@@ -88,7 +87,7 @@ export default function Keyboard({rightWord, setGoodResponseList, badResponseLis
                     <button className="keyboard-button" data-letter="-">-</button>
                 </div>
             </div>
-            <p>{message}</p>
+            <p style={{ textAlign: 'center', textTransform: 'uppercase' }}>{message}</p>
         </div>
     )
 }
