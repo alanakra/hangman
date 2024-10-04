@@ -43,16 +43,19 @@ function App() {
         <h1>Hangman</h1>
       </div>
       <Grid word={word}/>
-      <h2>{count}</h2>
+      <h2>Score: {count}</h2>
       <Figure/>
-      <Keyboard 
-        rightWord={word} 
-        badResponseList={badResponseList} 
-        setBadResponseList={setBadResponseList}
-        setGoodResponseList={setGoodResponseList}
-        setCount={setCount}
-        count={count}/>
-      <TriedLetters lettersList={badResponseList}/>
+      <div className="keyboards">
+        <Keyboard 
+          rightWord={word} 
+          badResponseList={badResponseList} 
+          goodResponseList={goodResponseList}
+          setBadResponseList={setBadResponseList}
+          setGoodResponseList={setGoodResponseList}
+          setCount={setCount}
+          count={count}/>
+        <TriedLetters lettersList={badResponseList}/>
+      </div>
     </>
   )
 }
