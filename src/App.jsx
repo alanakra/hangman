@@ -44,6 +44,7 @@ function App() {
       </div>
       <Grid word={word} goodResponseList={goodResponseList}/>
       <h2>Score: {count}</h2>
+      <h3>{count <= 0 ? `Fin de la partie. La bonne réponse était: ${word.join('').toUpperCase()}` : ''}</h3>
       <Figure count={count}/>
       <div className="keyboards">
         <Keyboard 

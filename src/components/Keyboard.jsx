@@ -1,65 +1,58 @@
 import '../keyboard.scss'
 import PropTypes from 'prop-types'
-import { useEffect, useState } from 'react'
-export default function Keyboard({rightWord, setGoodResponseList, badResponseList, goodResponseList, setBadResponseList, setCount, count}){
+import { useCallback, useEffect, useState } from 'react'
+
+const alphabet = Array.from('abcdefghijklmnopqrstuvwxyz-')
+
+export default function Keyboard({rightWord, setGoodResponseList, badResponseList, goodResponseList, setBadResponseList, setCount, count}) {
     const [letterInput, setLetterInput] = useState('')
-    const alphabet = Array.from('abcdefghijklmnopqrstuvwxyz-')
     const [message, setMessage] = useState('')
-    
-    useEffect(() => {
-        const handleKeyUp = (e) => {
-            const key = e.key
-            console.log(key)
-            if(alphabet.includes(key)) {
-                setLetterInput(e.key)
-                isLetterIncluded(key)
-            }
-        }
-        window.addEventListener('keyup', handleKeyUp)
-        return () => {
-            window.removeEventListener('keyup', handleKeyUp)
-        }
-    }, [letterInput])
 
-    const handleClickBtn = e => {
-        const letter = e.target.getAttribute('data-letter').toLowerCase()
-        console.log(letter)
-        if (letter != null) {
-            setLetterInput(letter)
-            isLetterIncluded(letter)
-        }
-    }
-
-    const isLetterIncluded = (letterInput) => {
-        console.log('Letter input -> : ',letterInput,', ','Bad response list: ->', badResponseList)
-        if (rightWord.includes(letterInput)) {
-            const cloneGoodResponseList = [...goodResponseList]
-            if (cloneGoodResponseList.includes(letterInput)) {
-                console.log('You already guessed that letter.')
-                setMessage('You already guessed that letter.')
-            } else {
-                cloneGoodResponseList.push(letterInput)
-                setGoodResponseList(cloneGoodResponseList)
+    const isLetterIncluded = useCallback((letter) => {
+        if (rightWord.includes(letter)) {
+            if (!goodResponseList.includes(letter)) {
+                setGoodResponseList([...goodResponseList, letter])
                 setMessage('Good response')
-                console.log('Good response: ->', goodResponseList)
+            } else {
+                setMessage('You already guessed that letter.')
             }
         } else {
-            const cloneBadResponseList = [...badResponseList]
-            if (!cloneBadResponseList.includes(letterInput)) {
-                cloneBadResponseList.push(letterInput)
-                console.log('Not included')
-                setMessage('Bad reponse')
-                setBadResponseList(cloneBadResponseList)
+            if (!badResponseList.includes(letter)) {
+                setBadResponseList([...badResponseList, letter])
+                setMessage('Bad response')
                 setCount(count - 1)
             } else {
                 setMessage('You already guessed that bad letter.')
             }
         }
+    }, [badResponseList, count, goodResponseList, rightWord, setBadResponseList, setCount, setGoodResponseList])
+
+    useEffect(() => {
+        const handleKeyUp = (e) => {
+            const key = e.key.toLowerCase()
+            if (alphabet.includes(key)) {
+                setLetterInput(key)
+                isLetterIncluded(key)
+            }
+        }
+
+        window.addEventListener('keyup', handleKeyUp)
+        return () => {
+            window.removeEventListener('keyup', handleKeyUp)
+        }
+    }, [isLetterIncluded])
+    
+    const handleClickBtn = e => {
+        const letter = e.target.getAttribute('data-letter').toLowerCase()
+        if (letter) {
+            setLetterInput(letter)
+            isLetterIncluded(letter)
+        }
     }
 
-    return(
+    return (
         <div>
-            <h3 style={{textAlign: 'center', textTransform: 'uppercase'}}>{letterInput}</h3>
+            <h3 style={{ textAlign: 'center', textTransform: 'uppercase' }}>{letterInput}</h3>
             <div className="keyboard-cont" onClick={handleClickBtn}>
                 <div className="first-row">
                     <button className="keyboard-button" data-letter="A">a</button>
