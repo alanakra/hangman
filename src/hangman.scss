@@ -12,31 +12,31 @@ $primaryColor: #00A8FF;
         position: relative;
     }
 
-    &.hang1 {
+    &.hang4 {
         .pole {
-            visibility: visible !important;
-        }
-    }
-
-    &.hang2 {
-        .shaft {
-            visibility: visible !important;
+            visibility: hidden !important;
         }
     }
 
     &.hang3 {
-        .rope {
-            visibility: visible !important;
+        .shaft {
+            visibility: hidden !important;
         }
     }
 
-    &.hang4 {
+    &.hang2 {
+        .rope {
+            visibility: hidden !important;
+        }
+    }
+
+    &.hang1 {
         .man {
             visibility: hidden !important;
         }
     }
 
-    &.hang5 {
+    &.hang0 {
         .wrapperMan {
             margin-top: 0px !important;
 
@@ -52,6 +52,12 @@ $primaryColor: #00A8FF;
                     animation: deadLeft .5s linear;
                 }
             }
+        }
+    }
+
+    &.hang5 {
+        .base {
+            visibility: hidden !important;
         }
     }
 

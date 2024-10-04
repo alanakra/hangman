@@ -44,7 +44,7 @@ function App() {
       </div>
       <Grid word={word} goodResponseList={goodResponseList}/>
       <h2>Score: {count}</h2>
-      <Figure/>
+      <Figure count={count}/>
       <div className="keyboards">
         <Keyboard 
           rightWord={word} 
