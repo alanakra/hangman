@@ -41,3 +41,9 @@ body {
     width: $base-fs*2;
   }
 }
+
+.keyboards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
