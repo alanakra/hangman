@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 export default function TriedLetters({lettersList}) {
     return(
         <div>
-            <h1>Bad responses</h1>
+            <h1>List of bad responses</h1>
             <div className="container"
             style={{
                 display: 'flex',
