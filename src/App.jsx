@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import Grid from "./components/Grid"
 import Figure from "./components/Figure"
 import Keyboard from "./components/Keyboard"
@@ -33,6 +33,20 @@ function App() {
 
     fetchWord();
   }, [])
+
+  const decision = useCallback((word, goodResponseList, count) => {
+    const foundAllLetters = word.every(letter => goodResponseList.includes(letter))
+    if (foundAllLetters) {
+        console.log('Félicitations, vous avez gagné !')
+    }
+    if (count <= 0) {
+        console.log(`Fin de la partie. Le mot était : ${word.join('').toUpperCase()}`)
+    }
+  }, [])
+
+  useEffect(() => {
+      decision(word, goodResponseList, count)
+  }, [word, goodResponseList, count, decision])
 
   if (loading) return <h1>Fetching word...</h1>
   if (fetchError) return <h1>Word not loaded:</h1>
