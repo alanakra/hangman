@@ -1,48 +1,64 @@
 import '../keyboard.scss'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
-export default function Keyboard({rightWord, setGoodResponseList, badResponseList, setBadResponseList, setCount, count}){
+export default function Keyboard({rightWord, setGoodResponseList, badResponseList, goodResponseList, setBadResponseList, setCount, count}){
     const [letterInput, setLetterInput] = useState('')
-    const alphabet = Array.from('abcdefghijklmnopqrstuvwxyz-');
+    const alphabet = Array.from('abcdefghijklmnopqrstuvwxyz-')
+    const [message, setMessage] = useState('')
     
     useEffect(() => {
         const handleKeyUp = (e) => {
             const key = e.key
+            console.log(key)
             if(alphabet.includes(key)) {
                 setLetterInput(e.key)
-                isLetterIncluded(letterInput)
+                isLetterIncluded(key)
             }
         }
         window.addEventListener('keyup', handleKeyUp)
         return () => {
             window.removeEventListener('keyup', handleKeyUp)
         }
-    }, [])
+    }, [letterInput])
 
     const handleClickBtn = e => {
-        const letter = e.target.getAttribute('data-letter')
+        const letter = e.target.getAttribute('data-letter').toLowerCase()
+        console.log(letter)
         if (letter != null) {
             setLetterInput(letter)
-            isLetterIncluded(letterInput)
+            isLetterIncluded(letter)
         }
     }
 
-    const isLetterIncluded = letterInput => {
+    const isLetterIncluded = (letterInput) => {
+        console.log('Letter input -> : ',letterInput,', ','Bad response list: ->', badResponseList)
         if (rightWord.includes(letterInput)) {
-            console.log('good')
+            const cloneGoodResponseList = [...goodResponseList]
+            if (cloneGoodResponseList.includes(letterInput)) {
+                console.log('You already guessed that letter.')
+                setMessage('You already guessed that letter.')
+            } else {
+                cloneGoodResponseList.push(letterInput)
+                setGoodResponseList(cloneGoodResponseList)
+                setMessage('Good response')
+                console.log('Good response: ->', goodResponseList)
+            }
         } else {
-            const cloneBadResponseList = badResponseList.slice()
-            cloneBadResponseList.push(letterInput)
-            console.log(cloneBadResponseList)
-            setBadResponseList(cloneBadResponseList)
-            console.log('bad')
-
-            setCount(count - 1)
+            const cloneBadResponseList = [...badResponseList]
+            if (!cloneBadResponseList.includes(letterInput)) {
+                cloneBadResponseList.push(letterInput)
+                console.log('Not included')
+                setMessage('Bad reponse')
+                setBadResponseList(cloneBadResponseList)
+                setCount(count - 1)
+            } else {
+                setMessage('You already guessed that bad letter.')
+            }
         }
     }
 
     return(
-        <>
+        <div>
             <h3 style={{textAlign: 'center', textTransform: 'uppercase'}}>{letterInput}</h3>
             <div className="keyboard-cont" onClick={handleClickBtn}>
                 <div className="first-row">
@@ -79,7 +95,8 @@ export default function Keyboard({rightWord, setGoodResponseList, badResponseLis
                     <button className="keyboard-button" data-letter="-">-</button>
                 </div>
             </div>
-        </>
+            <p>{message}</p>
+        </div>
     )
 }
 

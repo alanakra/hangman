@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 
 export default function TriedLetters({lettersList}) {
-    const stopDuplicate = new Set(lettersList)
     return(
-        <>
+        <div>
             <h1>Bad responses</h1>
             <div className="container"
             style={{
@@ -14,12 +13,12 @@ export default function TriedLetters({lettersList}) {
                 gap: '20px'
             }}>
                 {
-                    Array.from(stopDuplicate).map((letter, index) => (
+                    Array.from(lettersList).map((letter, index) => (
                         <p key={`${letter}-${index}`}>{letter}</p>
                     ))
                 }
             </div>
-        </>
+        </div>
     )
 }
 
