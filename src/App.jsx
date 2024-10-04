@@ -42,7 +42,7 @@ function App() {
       <div className="top">
         <h1>Hangman</h1>
       </div>
-      <Grid word={word}/>
+      <Grid word={word} goodResponseList={goodResponseList}/>
       <h2>Score: {count}</h2>
       <Figure/>
       <div className="keyboards">
