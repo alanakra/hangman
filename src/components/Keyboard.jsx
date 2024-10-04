@@ -85,9 +85,10 @@ export default function Keyboard({rightWord, setGoodResponseList, badResponseLis
 
 Keyboard.propTypes = {
     rightWord: PropTypes.array,
-    setGoodResponseList: PropTypes.function,
+    setGoodResponseList: PropTypes.func,
     badResponseList: PropTypes.array,
-    setBadResponseList: PropTypes.function,
-    setCount: PropTypes.array,
+    goodResponseList: PropTypes.array,
+    setBadResponseList: PropTypes.func,
+    setCount: PropTypes.func,
     count: PropTypes.number
 }
