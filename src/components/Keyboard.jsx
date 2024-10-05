@@ -4,9 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 
 const alphabet = Array.from('abcdefghijklmnopqrstuvwxyz-')
 
-export default function Keyboard({rightWord, setGoodResponseList, badResponseList, goodResponseList, setBadResponseList, setCount, count}) {
-    const [letterInput, setLetterInput] = useState('')
-    const [message, setMessage] = useState('')
+export default function Keyboard({rightWord, setGoodResponseList, badResponseList, goodResponseList, setBadResponseList, setCount, count, setMessage}) {
 
     const isLetterIncluded = useCallback((letter) => {
         if (rightWord.includes(letter)) {
@@ -85,7 +83,6 @@ export default function Keyboard({rightWord, setGoodResponseList, badResponseLis
                     <button className="keyboard-button" data-letter="-">-</button>
                 </div>
             </div>
-            <p style={{ textAlign: 'center', textTransform: 'uppercase' }}>{message}</p>
         </div>
     )
 }
@@ -97,5 +94,6 @@ Keyboard.propTypes = {
     goodResponseList: PropTypes.array,
     setBadResponseList: PropTypes.func,
     setCount: PropTypes.func,
-    count: PropTypes.number
+    count: PropTypes.number,
+    setMessage: PropTypes.func
 }

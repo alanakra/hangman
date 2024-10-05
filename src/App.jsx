@@ -11,6 +11,7 @@ function App() {
   const [badResponseList, setBadResponseList] = useState([])
   const [fetchError, setFetchError] = useState(null)
   const [count, setCount] = useState(6)
+  const [message, setMessage] = useState('')
 
   useEffect(() => {
     async function fetchWord() {
@@ -37,10 +38,10 @@ function App() {
   const decision = useCallback((word, goodResponseList, count) => {
     const foundAllLetters = word.every(letter => goodResponseList.includes(letter))
     if (foundAllLetters) {
-        console.log('Félicitations, vous avez gagné !')
+        setMessage('Félicitations, vous avez gagné !')
     }
     if (count <= 0) {
-        console.log(`Fin de la partie. Le mot était : ${word.join('').toUpperCase()}`)
+        setMessage(`Fin de la partie. Le mot était : ${word.join('').toUpperCase()}`)
     }
   }, [])
 
@@ -58,7 +59,7 @@ function App() {
       </div>
       <Grid word={word} goodResponseList={goodResponseList}/>
       <h2 style={{margin: '10px 0', fontSize: '28px'}}>Score: {count}</h2>
-      <h3>{count <= 0 ? `Fin de la partie. La bonne réponse était: ${word.join('').toUpperCase()}` : ''}</h3>
+      <h3>{message}</h3>
       <Figure count={count}/>
       <div className="keyboards">
         <Keyboard 
@@ -68,7 +69,9 @@ function App() {
           setBadResponseList={setBadResponseList}
           setGoodResponseList={setGoodResponseList}
           setCount={setCount}
-          count={count}/>
+          count={count}
+          setMessage={setMessage}
+          message={message}/>
         <TriedLetters lettersList={badResponseList}/>
       </div>
     </>
