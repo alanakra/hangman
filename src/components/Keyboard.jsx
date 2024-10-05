@@ -31,7 +31,6 @@ export default function Keyboard({rightWord, setGoodResponseList, badResponseLis
         const handleKeyUp = (e) => {
             const key = e.key.toLowerCase()
             if (alphabet.includes(key)) {
-                setLetterInput(key)
                 isLetterIncluded(key)
             }
         }
@@ -45,7 +44,6 @@ export default function Keyboard({rightWord, setGoodResponseList, badResponseLis
     const handleClickBtn = e => {
         const letter = e.target.getAttribute('data-letter').toLowerCase()
         if (letter) {
-            setLetterInput(letter)
             isLetterIncluded(letter)
         }
     }
