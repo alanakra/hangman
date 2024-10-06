@@ -3,6 +3,7 @@ import Grid from "./components/Grid"
 import Figure from "./components/Figure"
 import Keyboard from "./components/Keyboard"
 import TriedLetters from "./components/TriedLetters"
+import PopupEnd from "./components/PopupEnd"
 
 function App() {
   const [word, setWord] = useState([])
@@ -37,6 +38,9 @@ function App() {
 
   const decision = useCallback((word, goodResponseList, count) => {
     const foundAllLetters = word.every(letter => goodResponseList.includes(letter))
+    console.warn(goodResponseList)
+    console.warn(word)
+    console.warn(foundAllLetters)
     if (foundAllLetters) {
         setMessage('Félicitations, vous avez gagné !')
     }
@@ -54,6 +58,7 @@ function App() {
 
   return (
     <>
+      <PopupEnd message={message}/>
       <div className="top">
         <h1>Hangman</h1>
       </div>
