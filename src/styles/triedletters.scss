@@ -1,0 +1,15 @@
+.tried-container {
+    margin-bottom: 30px;
+    h1 {
+        text-align: center;
+        text-transform: uppercase;
+    }
+    .list {
+        display: flex;
+        justify-content: center;
+        font-size: 2.3rem;
+        text-decoration: line-through;
+        gap: 20px;
+        text-transform: uppercase;
+    }
+}

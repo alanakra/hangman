@@ -66,6 +66,12 @@ function App() {
 
   return (
     <>
+      <div className="overlay">
+        <div>
+          <img src="/assets/rotate-phone.svg" alt="" className="phone-icon"/>
+          <p>Please rotate your phone</p>
+        </div>
+      </div>
       <PopupEnd 
         message={message} 
         modalIsOpen={modalIsOpen}
