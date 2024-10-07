@@ -72,7 +72,7 @@ function App() {
         modalIsOpen={modalIsOpen}
         restartGame={restartGame}/>
       <div className="top">
-        <h1>Hangman - {langChecked ? 'English' : 'French'}</h1>
+        <h1>Hangman - {langChecked ? 'French' : 'English'}</h1>
         <SwitchLang 
           langChecked={langChecked} 
           setLangChecked={setLangChecked}
