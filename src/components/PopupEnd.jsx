@@ -1,6 +1,5 @@
 import Modal from 'react-modal'
 import PropTypes from 'prop-types'
-import closeModalIcon from '/assets/close.svg'
 
 const customStylesModal = {
     content: {
@@ -30,23 +29,10 @@ export default function PopupEnd({message, modalIsOpen, setIsOpen}) {
         <div>
             <Modal
                 isOpen={modalIsOpen}
-                onRequestClose={closeModal}
                 style={customStylesModal}
                 contentLabel="End Game"
             >
                 <div>
-                    <img
-                        src={closeModalIcon}
-                        style={{
-                            height: "1.6rem",
-                            cursor: "pointer",
-                            position: "absolute",
-                            right: "20px",
-                            top: "20px"
-                        }}
-                        onClick={closeModal}
-                        alt="Close"
-                    />
                     <h3
                         style={{
                             fontSize: "1.7rem"

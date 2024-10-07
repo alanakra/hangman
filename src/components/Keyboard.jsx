@@ -13,7 +13,8 @@ export default function Keyboard({
     setCount, 
     count, 
     setMessage,
-    setIsOpen}) {
+    setIsOpen,
+    modalIsOpen}) {
 
     const isLetterIncluded = useCallback((letter) => {
         if (rightWord.includes(letter)) {
@@ -38,10 +39,10 @@ export default function Keyboard({
         const foundAllLetters = rightWord.every(letter => goodResponseList.includes(letter))
 
         if (foundAllLetters) {
-            setMessage('Félicitations, vous avez gagné !')
+            setMessage('Congratulations, You have won !')
             setIsOpen(true)
         } else if (count <= 0) {
-            setMessage(`Fin de la partie. Le mot était : ${rightWord.join('').toUpperCase()}`)
+            setMessage(`Game over. The word was : ${rightWord.join('').toUpperCase()}`)
             setIsOpen(true)
         }
     }, [goodResponseList, count, rightWord, setMessage, setIsOpen])
@@ -49,7 +50,7 @@ export default function Keyboard({
     useEffect(() => {
         const handleKeyUp = (e) => {
             const key = e.key.toLowerCase()
-            if (alphabet.includes(key)) {
+            if (alphabet.includes(key) && !modalIsOpen) {
                 isLetterIncluded(key)
             }
         }
@@ -58,7 +59,7 @@ export default function Keyboard({
         return () => {
             window.removeEventListener('keyup', handleKeyUp)
         }
-    }, [isLetterIncluded])
+    }, [isLetterIncluded, modalIsOpen])
     
     const handleClickBtn = e => {
         const letter = e.target.getAttribute('data-letter').toLowerCase()
@@ -117,5 +118,6 @@ Keyboard.propTypes = {
     setCount: PropTypes.func,
     count: PropTypes.number,
     setMessage: PropTypes.func,
-    setIsOpen: PropTypes.func
+    setIsOpen: PropTypes.func,
+    modalIsOpen: PropTypes.bool
 }

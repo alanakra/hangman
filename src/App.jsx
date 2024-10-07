@@ -60,7 +60,8 @@ function App() {
           count={count}
           setMessage={setMessage}
           message={message}
-          setIsOpen={setIsOpen}/>
+          setIsOpen={setIsOpen}
+          modalIsOpen={modalIsOpen}/>
         <TriedLetters lettersList={badResponseList}/>
       </div>
     </>
