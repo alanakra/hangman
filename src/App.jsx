@@ -85,21 +85,23 @@ function App() {
       </div>
       <Grid word={word} goodResponseList={goodResponseList}/>      
       <h3 style={{margin: '10px 0', fontSize: '28px'}}>{message}</h3>
-      <Figure count={count}/>
-      <div className="keyboards">
-        <Keyboard 
-          rightWord={word} 
-          badResponseList={badResponseList} 
-          goodResponseList={goodResponseList}
-          setBadResponseList={setBadResponseList}
-          setGoodResponseList={setGoodResponseList}
-          setCount={setCount}
-          count={count}
-          setMessage={setMessage}
-          message={message}
-          setModalIsOpen={setModalIsOpen}
-          modalIsOpen={modalIsOpen}/>
-        <TriedLetters lettersList={badResponseList}/>
+      <div className="bottom">
+        <Figure count={count}/>
+        <div className="keyboards">
+          <Keyboard 
+            rightWord={word} 
+            badResponseList={badResponseList} 
+            goodResponseList={goodResponseList}
+            setBadResponseList={setBadResponseList}
+            setGoodResponseList={setGoodResponseList}
+            setCount={setCount}
+            count={count}
+            setMessage={setMessage}
+            message={message}
+            setModalIsOpen={setModalIsOpen}
+            modalIsOpen={modalIsOpen}/>
+          <TriedLetters lettersList={badResponseList}/>
+        </div>
       </div>
     </>
   )

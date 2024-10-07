@@ -63,6 +63,17 @@
     }
 }
 
+.bottom {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 950px) {
+    .bottom {
+        flex-direction: column-reverse;
+    }
+}
+
 .keyboards {
     display: flex;
     justify-content: center;
