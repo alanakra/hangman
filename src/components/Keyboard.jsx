@@ -1,10 +1,18 @@
 import '../keyboard.scss'
 import PropTypes from 'prop-types'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect } from 'react'
 
 const alphabet = Array.from('abcdefghijklmnopqrstuvwxyz-')
 
-export default function Keyboard({rightWord, setGoodResponseList, badResponseList, goodResponseList, setBadResponseList, setCount, count, setMessage}) {
+export default function Keyboard({
+    rightWord, 
+    setGoodResponseList, 
+    badResponseList, 
+    goodResponseList, 
+    setBadResponseList, 
+    setCount, 
+    count, 
+    setMessage}) {
 
     const isLetterIncluded = useCallback((letter) => {
         if (rightWord.includes(letter)) {
@@ -22,6 +30,17 @@ export default function Keyboard({rightWord, setGoodResponseList, badResponseLis
             } else {
                 setMessage('You already guessed that bad letter.')
             }
+        }
+
+        const foundAllLetters = rightWord.every(letter => goodResponseList.includes(letter))
+        console.warn(goodResponseList)
+        console.warn(rightWord)
+        console.warn(foundAllLetters)
+        if (foundAllLetters) {
+            setMessage('Félicitations, vous avez gagné !')
+        }
+        if (count <= 0) {
+            setMessage(`Fin de la partie. Le mot était : ${rightWord.join('').toUpperCase()}`)
         }
     }, [badResponseList, count, goodResponseList, rightWord, setBadResponseList, setCount, setGoodResponseList])
 
