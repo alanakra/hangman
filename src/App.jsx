@@ -4,6 +4,7 @@ import Figure from "./components/Figure"
 import Keyboard from "./components/Keyboard"
 import TriedLetters from "./components/TriedLetters"
 import PopupEnd from "./components/PopupEnd"
+import SwitchLang from "./components/SwitchLang"
 
 function App() {
   const [word, setWord] = useState([])
@@ -14,11 +15,18 @@ function App() {
   const [count, setCount] = useState(6)
   const [message, setMessage] = useState('')
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [langChecked, setLangChecked] = useState(false) 
 
-  async function fetchWord() {
+  async function fetchWord(isLangFR = false) {
     try {
       const response = await fetch("http://localhost:3333", {
-        method: 'POST'
+        method: 'POST',
+        headers:{
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+          "locale": `${isLangFR ? 'fr-FR' : 'en-GB' }`
+        })
       })
       const data = await response.json()
       const word = data.word
@@ -37,14 +45,21 @@ function App() {
     fetchWord()
   }, [])
 
-  function restartGame() {
+  function restartGame(lang) {
     setLoading(true)
     setBadResponseList([])
     setGoodResponseList([])
     setCount(6)
     setMessage('')
     setModalIsOpen(false)
-    fetchWord()
+    fetchWord(lang)
+  }
+
+  function handleChangeLang (e) {
+    e.stopPropagation()
+    console.log(e.target.checked)
+    setLangChecked(e.target.checked)
+    restartGame(e.target.checked)
   }
 
   if (loading) return <h1>Fetching word...</h1>
@@ -57,7 +72,11 @@ function App() {
         modalIsOpen={modalIsOpen}
         restartGame={restartGame}/>
       <div className="top">
-        <h1>Hangman</h1>
+        <h1>Hangman - {langChecked ? 'English' : 'French'}</h1>
+        <SwitchLang 
+          langChecked={langChecked} 
+          setLangChecked={setLangChecked}
+          handleChangeLang={handleChangeLang}/>
       </div>
       <Grid word={word} goodResponseList={goodResponseList}/>      
       <h3 style={{margin: '10px 0', fontSize: '28px'}}>{message}</h3>
