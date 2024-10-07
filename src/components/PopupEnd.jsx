@@ -1,5 +1,6 @@
-import { useState } from 'react'
 import Modal from 'react-modal'
+import PropTypes from 'prop-types'
+import closeModalIcon from '/assets/close.svg'
 
 const customStylesModal = {
     content: {
@@ -9,8 +10,8 @@ const customStylesModal = {
         bottom: 'auto',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
-        width: '60vw',
-        height: '60vh',
+        width: '30vw',
+        height: '30vh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
@@ -19,17 +20,7 @@ const customStylesModal = {
 
 Modal.setAppElement('#root')
 
-export default function PopupEnd({message}) {
-    let subtitle
-    const [modalIsOpen, setIsOpen] = useState(true)
-
-    function openModal() {
-        setIsOpen(true)
-    }
-
-    function afterOpenModal() {
-        subtitle.style.color = '#f00'
-    }
+export default function PopupEnd({message, modalIsOpen, setIsOpen}) {
 
     function closeModal() {
         setIsOpen(false)
@@ -37,20 +28,48 @@ export default function PopupEnd({message}) {
 
     return(
         <div>
-            <button onClick={openModal}>Open Modal</button>
             <Modal
                 isOpen={modalIsOpen}
-                onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
                 style={customStylesModal}
                 contentLabel="End Game"
             >
                 <div>
-                    <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-                    <button onClick={closeModal}>close</button>
-                    <div>{message}</div>
+                    <img
+                        src={closeModalIcon}
+                        style={{
+                            height: "1.6rem",
+                            cursor: "pointer",
+                            position: "absolute",
+                            right: "20px",
+                            top: "20px"
+                        }}
+                        onClick={closeModal}
+                        alt="Close"
+                    />
+                    <h3
+                        style={{
+                            fontSize: "1.7rem"
+                        }}>{message}</h3>
+                    <button
+                        style={{
+                            padding: "8px",
+                            fontSize: "1.2rem",
+                            borderRadius: "0px",
+                            border: "none",
+                            backgroundColor: "#008CBA",
+                            color: "white",
+                            marginTop: "8px",
+                            cursor: "pointer"
+                        }}>Recommencer</button>
                 </div>
             </Modal>
         </div>
     )
+}
+
+PopupEnd.propTypes = {
+    message: PropTypes.string,
+    modalIsOpen: PropTypes.bool,
+    setIsOpen: PropTypes.func
 }

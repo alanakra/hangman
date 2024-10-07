@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import Grid from "./components/Grid"
 import Figure from "./components/Figure"
 import Keyboard from "./components/Keyboard"
@@ -13,6 +13,7 @@ function App() {
   const [fetchError, setFetchError] = useState(null)
   const [count, setCount] = useState(6)
   const [message, setMessage] = useState('')
+  const [modalIsOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     async function fetchWord() {
@@ -36,35 +37,17 @@ function App() {
     fetchWord();
   }, [])
 
-  const decision = useCallback((word, goodResponseList, count) => {
-    const foundAllLetters = word.every(letter => goodResponseList.includes(letter))
-    console.warn(goodResponseList)
-    console.warn(word)
-    console.warn(foundAllLetters)
-    if (foundAllLetters) {
-        setMessage('Félicitations, vous avez gagné !')
-    }
-    if (count <= 0) {
-        setMessage(`Fin de la partie. Le mot était : ${word.join('').toUpperCase()}`)
-    }
-  }, [])
-
-  useEffect(() => {
-      decision(word, goodResponseList, count)
-  }, [word, goodResponseList, count, decision])
-
   if (loading) return <h1>Fetching word...</h1>
   if (fetchError) return <h1>Word not loaded:</h1>
 
   return (
     <>
-      <PopupEnd message={message}/>
+      <PopupEnd message={message} modalIsOpen={modalIsOpen} setIsOpen={setIsOpen}/>
       <div className="top">
         <h1>Hangman</h1>
       </div>
-      <Grid word={word} goodResponseList={goodResponseList}/>
-      <h2 style={{margin: '10px 0', fontSize: '28px'}}>Score: {count}</h2>
-      <h3>{message}</h3>
+      <Grid word={word} goodResponseList={goodResponseList}/>      
+      <h3 style={{margin: '10px 0', fontSize: '28px'}}>{message}</h3>
       <Figure count={count}/>
       <div className="keyboards">
         <Keyboard 
@@ -76,7 +59,8 @@ function App() {
           setCount={setCount}
           count={count}
           setMessage={setMessage}
-          message={message}/>
+          message={message}
+          setIsOpen={setIsOpen}/>
         <TriedLetters lettersList={badResponseList}/>
       </div>
     </>

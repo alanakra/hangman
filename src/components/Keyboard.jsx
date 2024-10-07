@@ -12,7 +12,8 @@ export default function Keyboard({
     setBadResponseList, 
     setCount, 
     count, 
-    setMessage}) {
+    setMessage,
+    setIsOpen}) {
 
     const isLetterIncluded = useCallback((letter) => {
         if (rightWord.includes(letter)) {
@@ -31,18 +32,19 @@ export default function Keyboard({
                 setMessage('You already guessed that bad letter.')
             }
         }
+    }, [badResponseList, count, goodResponseList, rightWord, setBadResponseList, setCount, setGoodResponseList])
 
+    useEffect(() => {
         const foundAllLetters = rightWord.every(letter => goodResponseList.includes(letter))
-        console.warn(goodResponseList)
-        console.warn(rightWord)
-        console.warn(foundAllLetters)
+
         if (foundAllLetters) {
             setMessage('Félicitations, vous avez gagné !')
-        }
-        if (count <= 0) {
+            setIsOpen(true)
+        } else if (count <= 0) {
             setMessage(`Fin de la partie. Le mot était : ${rightWord.join('').toUpperCase()}`)
+            setIsOpen(true)
         }
-    }, [badResponseList, count, goodResponseList, rightWord, setBadResponseList, setCount, setGoodResponseList])
+    }, [goodResponseList, count, rightWord, setMessage, setIsOpen])
 
     useEffect(() => {
         const handleKeyUp = (e) => {
@@ -114,5 +116,6 @@ Keyboard.propTypes = {
     setBadResponseList: PropTypes.func,
     setCount: PropTypes.func,
     count: PropTypes.number,
-    setMessage: PropTypes.func
+    setMessage: PropTypes.func,
+    setIsOpen: PropTypes.func
 }
