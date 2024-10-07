@@ -33,3 +33,23 @@
         }
     }
 }
+
+
+@media screen and (max-width: 950px) {
+    .keyboard-cont {
+        & > div {
+            $spacing: 3px;
+            gap: $spacing;
+            margin-bottom: $spacing;
+            .keyboard-button {
+                $dimens: 4.7vw;
+                font-size: 1rem;
+                min-width: $dimens !important;
+                min-height: $dimens;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+}

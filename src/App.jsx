@@ -5,6 +5,7 @@ import Keyboard from "./components/Keyboard"
 import TriedLetters from "./components/TriedLetters"
 import PopupEnd from "./components/PopupEnd"
 import SwitchLang from "./components/SwitchLang"
+import './styles/index.scss'
 
 function App() {
   const [word, setWord] = useState([])
@@ -31,7 +32,6 @@ function App() {
       const data = await response.json()
       const word = data.word
       const convertedWord = [...word]
-      console.log(convertedWord)
       setWord(convertedWord)
       setLoading(false)
     } catch (error) {
@@ -57,7 +57,6 @@ function App() {
 
   function handleChangeLang (e) {
     e.stopPropagation()
-    console.log(e.target.checked)
     setLangChecked(e.target.checked)
     restartGame(e.target.checked)
   }

@@ -1,4 +1,4 @@
-import '../hangman.scss'
+import '../styles/hangman.scss'
 import PropTypes from 'prop-types'
 export default function Figure({count}){
     let className = ""

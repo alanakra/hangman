@@ -1,4 +1,4 @@
-import '../keyboard.scss'
+import '../styles/keyboard.scss'
 import PropTypes from 'prop-types'
 import { useCallback, useEffect } from 'react'
 
