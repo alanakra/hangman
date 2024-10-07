@@ -13,36 +13,49 @@ function App() {
   const [fetchError, setFetchError] = useState(null)
   const [count, setCount] = useState(6)
   const [message, setMessage] = useState('')
-  const [modalIsOpen, setIsOpen] = useState(false)
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+
+  async function fetchWord() {
+    try {
+      const response = await fetch("http://localhost:3333", {
+        method: 'POST'
+      })
+      const data = await response.json()
+      const word = data.word
+      const convertedWord = [...word]
+      console.log(convertedWord)
+      setWord(convertedWord)
+      setLoading(false)
+    } catch (error) {
+      console.error("Error fetching the word:", error)
+      setLoading(false)
+      setFetchError(true)
+    }
+  }
 
   useEffect(() => {
-    async function fetchWord() {
-      try {
-        const response = await fetch("http://localhost:3333", {
-          method: 'POST'
-        })
-        const data = await response.json()
-        const word = data.word
-        const convertedWord = [...word]
-        console.log(convertedWord)
-        setWord(convertedWord)
-        setLoading(false)
-      } catch (error) {
-        console.error("Error fetching the word:", error)
-        setLoading(false)
-        setFetchError(true)
-      }
-    }
-
-    fetchWord();
+    fetchWord()
   }, [])
+
+  function restartGame() {
+    setLoading(true)
+    setBadResponseList([])
+    setGoodResponseList([])
+    setCount(6)
+    setMessage('')
+    setModalIsOpen(false)
+    fetchWord()
+  }
 
   if (loading) return <h1>Fetching word...</h1>
   if (fetchError) return <h1>Word not loaded:</h1>
 
   return (
     <>
-      <PopupEnd message={message} modalIsOpen={modalIsOpen} setIsOpen={setIsOpen}/>
+      <PopupEnd 
+        message={message} 
+        modalIsOpen={modalIsOpen}
+        restartGame={restartGame}/>
       <div className="top">
         <h1>Hangman</h1>
       </div>
@@ -60,7 +73,7 @@ function App() {
           count={count}
           setMessage={setMessage}
           message={message}
-          setIsOpen={setIsOpen}
+          setModalIsOpen={setModalIsOpen}
           modalIsOpen={modalIsOpen}/>
         <TriedLetters lettersList={badResponseList}/>
       </div>

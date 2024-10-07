@@ -19,12 +19,8 @@ const customStylesModal = {
 
 Modal.setAppElement('#root')
 
-export default function PopupEnd({message, modalIsOpen, setIsOpen}) {
-
-    function closeModal() {
-        setIsOpen(false)
-    }
-
+export default function PopupEnd({message, modalIsOpen, restartGame}) {
+    if (!modalIsOpen) return null
     return(
         <div>
             <Modal
@@ -47,7 +43,8 @@ export default function PopupEnd({message, modalIsOpen, setIsOpen}) {
                             color: "white",
                             marginTop: "8px",
                             cursor: "pointer"
-                        }}>Recommencer</button>
+                        }}
+                        onClick={restartGame}>Restart</button>
                 </div>
             </Modal>
         </div>
@@ -57,5 +54,5 @@ export default function PopupEnd({message, modalIsOpen, setIsOpen}) {
 PopupEnd.propTypes = {
     message: PropTypes.string,
     modalIsOpen: PropTypes.bool,
-    setIsOpen: PropTypes.func
+    restartGame: PropTypes.func
 }

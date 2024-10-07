@@ -13,7 +13,7 @@ export default function Keyboard({
     setCount, 
     count, 
     setMessage,
-    setIsOpen,
+    setModalIsOpen,
     modalIsOpen}) {
 
     const isLetterIncluded = useCallback((letter) => {
@@ -40,12 +40,12 @@ export default function Keyboard({
 
         if (foundAllLetters) {
             setMessage('Congratulations, You have won !')
-            setIsOpen(true)
+            setModalIsOpen(true)
         } else if (count <= 0) {
             setMessage(`Game over. The word was : ${rightWord.join('').toUpperCase()}`)
-            setIsOpen(true)
+            setModalIsOpen(true)
         }
-    }, [goodResponseList, count, rightWord, setMessage, setIsOpen])
+    }, [goodResponseList, count, rightWord, setMessage, setModalIsOpen])
 
     useEffect(() => {
         const handleKeyUp = (e) => {
@@ -118,6 +118,6 @@ Keyboard.propTypes = {
     setCount: PropTypes.func,
     count: PropTypes.number,
     setMessage: PropTypes.func,
-    setIsOpen: PropTypes.func,
+    setModalIsOpen: PropTypes.func,
     modalIsOpen: PropTypes.bool
 }
