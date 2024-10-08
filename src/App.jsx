@@ -6,6 +6,7 @@ import TriedLetters from "./components/TriedLetters"
 import PopupEnd from "./components/PopupEnd"
 import SwitchLang from "./components/SwitchLang"
 import './styles/index.scss'
+import { useTranslation } from "react-i18next"
 
 function App() {
   const [word, setWord] = useState([])
@@ -19,7 +20,8 @@ function App() {
   const [langChecked, setLangChecked] = useState(() => {
     const saved = JSON.parse(localStorage.getItem('isFrench'))
     return saved || false
-  }) 
+  })
+  const { t } = useTranslation()
 
   async function fetchWord(isLangFR = false) {
     try {
@@ -82,6 +84,7 @@ function App() {
         restartGame={restartGame}/>
       <div className="top">
         <h1>Hangman - {langChecked ? 'French' : 'English'}</h1>
+        <h2>{t("hello_world")}</h2>
         <SwitchLang 
           langChecked={langChecked} 
           setLangChecked={setLangChecked}
