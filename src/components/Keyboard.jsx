@@ -33,7 +33,7 @@ export default function Keyboard({
                 setMessage('You already guessed that bad letter.')
             }
         }
-    }, [badResponseList, count, goodResponseList, rightWord, setBadResponseList, setCount, setGoodResponseList])
+    }, [badResponseList, count, goodResponseList, rightWord, setBadResponseList, setCount, setGoodResponseList, setMessage])
 
     useEffect(() => {
         const foundAllLetters = rightWord.every(letter => goodResponseList.includes(letter))
