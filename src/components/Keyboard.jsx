@@ -39,7 +39,7 @@ export default function Keyboard({
         const foundAllLetters = rightWord.every(letter => goodResponseList.includes(letter))
 
         if (foundAllLetters) {
-            setMessage('Congratulations, You have won !')
+            setMessage('Congratulations, You have won ! 🔥🔥🔥')
             setModalIsOpen(true)
         } else if (count <= 0) {
             setMessage(`Game over. The word was : ${rightWord.join('').toUpperCase()}`)

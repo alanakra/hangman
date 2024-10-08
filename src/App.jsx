@@ -88,7 +88,7 @@ function App() {
           handleChangeLang={handleChangeLang}/>
       </div>
       <Grid word={word} goodResponseList={goodResponseList}/>      
-      <h3 style={{margin: '10px 0', fontSize: '28px'}}>{message}</h3>
+      <h3>{message}</h3>
       <div className="bottom">
         <Figure count={count}/>
         <div className="keyboards">
