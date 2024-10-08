@@ -5,6 +5,7 @@ import Keyboard from "./components/Keyboard"
 import TriedLetters from "./components/TriedLetters"
 import PopupEnd from "./components/PopupEnd"
 import SwitchLang from "./components/SwitchLang"
+import './styles/index.scss'
 
 function App() {
   const [word, setWord] = useState([])
@@ -31,7 +32,6 @@ function App() {
       const data = await response.json()
       const word = data.word
       const convertedWord = [...word]
-      console.log(convertedWord)
       setWord(convertedWord)
       setLoading(false)
     } catch (error) {
@@ -57,7 +57,6 @@ function App() {
 
   function handleChangeLang (e) {
     e.stopPropagation()
-    console.log(e.target.checked)
     setLangChecked(e.target.checked)
     restartGame(e.target.checked)
   }
@@ -67,12 +66,18 @@ function App() {
 
   return (
     <>
+      <div className="overlay">
+        <div>
+          <img src="/assets/rotate-phone.svg" alt="" className="phone-icon"/>
+          <p>Please rotate your phone</p>
+        </div>
+      </div>
       <PopupEnd 
         message={message} 
         modalIsOpen={modalIsOpen}
         restartGame={restartGame}/>
       <div className="top">
-        <h1>Hangman - {langChecked ? 'English' : 'French'}</h1>
+        <h1>Hangman - {langChecked ? 'French' : 'English'}</h1>
         <SwitchLang 
           langChecked={langChecked} 
           setLangChecked={setLangChecked}
@@ -80,21 +85,23 @@ function App() {
       </div>
       <Grid word={word} goodResponseList={goodResponseList}/>      
       <h3 style={{margin: '10px 0', fontSize: '28px'}}>{message}</h3>
-      <Figure count={count}/>
-      <div className="keyboards">
-        <Keyboard 
-          rightWord={word} 
-          badResponseList={badResponseList} 
-          goodResponseList={goodResponseList}
-          setBadResponseList={setBadResponseList}
-          setGoodResponseList={setGoodResponseList}
-          setCount={setCount}
-          count={count}
-          setMessage={setMessage}
-          message={message}
-          setModalIsOpen={setModalIsOpen}
-          modalIsOpen={modalIsOpen}/>
-        <TriedLetters lettersList={badResponseList}/>
+      <div className="bottom">
+        <Figure count={count}/>
+        <div className="keyboards">
+          <Keyboard 
+            rightWord={word} 
+            badResponseList={badResponseList} 
+            goodResponseList={goodResponseList}
+            setBadResponseList={setBadResponseList}
+            setGoodResponseList={setGoodResponseList}
+            setCount={setCount}
+            count={count}
+            setMessage={setMessage}
+            message={message}
+            setModalIsOpen={setModalIsOpen}
+            modalIsOpen={modalIsOpen}/>
+          <TriedLetters lettersList={badResponseList}/>
+        </div>
       </div>
     </>
   )
