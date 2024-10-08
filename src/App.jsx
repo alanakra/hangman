@@ -16,7 +16,10 @@ function App() {
   const [count, setCount] = useState(6)
   const [message, setMessage] = useState('')
   const [modalIsOpen, setModalIsOpen] = useState(false)
-  const [langChecked, setLangChecked] = useState(false) 
+  const [langChecked, setLangChecked] = useState(() => {
+    const saved = JSON.parse(localStorage.getItem('isFrench'))
+    return saved || false
+  }) 
 
   async function fetchWord(isLangFR = false) {
     try {
@@ -58,6 +61,7 @@ function App() {
   function handleChangeLang (e) {
     e.stopPropagation()
     setLangChecked(e.target.checked)
+    localStorage.setItem('isFrench', e.target.checked)
     restartGame(e.target.checked)
   }
 
