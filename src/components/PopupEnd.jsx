@@ -1,31 +1,33 @@
-import Modal from 'react-modal'
+import Box from '@mui/material/Box'
+import Modal from '@mui/material/Modal'
 import PropTypes from 'prop-types'
 import '../styles/popup-end.scss'
 
-
-const customStylesModal = {
-    content: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '65vw',
-        height: '65vh',
-        transform: 'translate(25%,25%)'
-    },
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '65vw',
+    height: '65vh',
+    bgcolor: 'white',
+    boxShadow: 24,
+    p: 4,
+    zIndex: 30
 }
-
-Modal.setAppElement('#root')
 
 export default function PopupEnd({message, modalIsOpen, restartGame}) {
     if (!modalIsOpen) return null
     return(
         <div>
             <Modal
-                isOpen={modalIsOpen}
-                style={customStylesModal}
-                contentLabel="End Game"
+                open={modalIsOpen}
+                style={{zIndex: 30}}
+                aria-labelledby="End Game"
+                aria-describedby={message}
             >
-                <div
+                <Box
+                sx={style}
                     className="popup-end">
                         <div>
                             <h3
@@ -46,7 +48,7 @@ export default function PopupEnd({message, modalIsOpen, restartGame}) {
                                 onClick={restartGame}>Restart
                             </button>
                         </div>
-                </div>
+                </Box>
             </Modal>
         </div>
     )
